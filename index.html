@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gujarat Heritage Tourism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a192f;
+            --secondary-dark: #112240;
+            --teal: #00b8a9;
+            --neon-blue: #64ffda;
+            --silver: #ccd6f6;
+            --white: #ffffff;
+            --glass-bg: rgba(17, 34, 64, 0.7);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-dark);
+            color: var(--silver);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a192f 0%, #112240 50%, #0a192f 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 184, 169, 0.1) 0%, transparent 70%);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(17, 34, 64, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--neon-blue), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--silver);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--neon-blue);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 260px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 10px;
+            padding: 0.7rem 0;
+            margin-top: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* NAVBAR DROPDOWN LINKS WITH IMAGES */
+        .dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.5rem 1.2rem;
+            color: var(--silver);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(100, 255, 218, 0.08);
+            color: var(--neon-blue);
+            transform: translateX(4px);
+        }
+
+        .dropdown-content img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--neon-blue);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            background: url('C:/Users/ADMIN/Downloads/sd.jpg') center/cover;
+            filter: grayscale(20%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--silver);
+            animation: slideUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--teal), var(--neon-blue));
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: slideUp 1s ease 0.4s both;
+            box-shadow: 0 10px 30px rgba(0, 184, 169, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 184, 169, 0.5);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--white), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--silver);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+
+        /* Heritage Cards */
+        .heritage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .heritage-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .heritage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 184, 169, 0.3);
+            border-color: var(--neon-blue);
+        }
+
+        /* Card images unified */
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;      /* show full image */
+            object-position: center;
+            display: block;
+            background: #000;         /* subtle background behind image */
+        }
+
+        .card-content {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .card-content p {
+            color: var(--silver);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .learn-more {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+            margin-top: auto;
+        }
+
+        .learn-more:hover {
+            gap: 1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            line-height: 1.8;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--silver);
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            object-fit: contain;
+            background: #000;
+            border-radius: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        /* Detail Page */
+        .detail-hero {
+            height: 1200px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+            overflow: hidden;
+        }
+
+        .detail-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.3;
+        }
+
+        .detail-hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .detail-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .detail-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .detail-main {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+
+        .detail-main h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .detail-main p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--silver);
+        }
+
+        .detail-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .info-box h3 {
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--silver);
+        }
+
+        .info-value {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--silver);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--neon-blue);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            color: var(--silver);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .about-content,
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .heritage-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .detail-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Page visibility */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header id="header">
+        <nav>
+            <div class="logo" onclick="showPage('home')">Gujarat Heritage</div>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li class="dropdown">
+                    <a href="#">Heritage Sites ▾</a>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="showDetail('statue-unity')">
+                            <img src="https://i.pinimg.com/736x/6f/36/a3/6f36a3891c69f65e2b89dd4da2e4d23b.jpg" alt="Statue of Unity">
+                            Statue of Unity
+                        </a>
+                        <a href="#" onclick="showDetail('rani-ki-vav')">
+                            <img src="https://i.pinimg.com/1200x/92/c7/11/92c711a2090402caa10c0eb7af5cd730.jpg" alt="Rani ki Vav">
+                            Rani ki Vav
+                        </a>
+                        <a href="#" onclick="showDetail('modhera')">
+                            <img src="https://i.pinimg.com/736x/4f/36/93/4f36932ffebba4d6cd316e3726d39c5b.jpg" alt="Modhera Sun Temple">
+                            Modhera Sun Temple
+                        </a>
+                        <a href="#" onclick="showDetail('sabarmati')">
+                            <img src="https://i.pinimg.com/1200x/42/5a/76/425a76ac31732c584bfd5f921e0141c1.jpg" alt="Sabarmati Ashram">
+                            Sabarmati Ashram
+                        </a>
+                        <a href="#" onclick="showDetail('champaner')">
+                            <img src="https://i.pinimg.com/1200x/0a/3f/a7/0a3fa70555596d13f8b3e3eb23c8372e.jpg" alt="Champaner-Pavagadh">
+                            Champaner-Pavagadh
+                        </a>
+                        <a href="#" onclick="showDetail('dwarka')">
+                            <img src="https://i.pinimg.com/1200x/a6/36/b5/a636b544f971f6a23e3c8a301e796bba.jpg" alt="Dwarka Temple">
+                            Dwarka Temple
+                        </a>
+                        <a href="#" onclick="showDetail('somnath')">
+                            <img src="https://i.pinimg.com/1200x/65/80/11/658011808d7a409403f097bd0856dc47.jpg" alt="Somnath Temple">
+                            Somnath Temple
+                        </a>
+                        <a href="#" onclick="showDetail('sidi-saiyyed')">
+                            <img src="https://i.pinimg.com/736x/10/3b/4d/103b4d19f5682c99c71c64f3d0b46cf1.jpg" alt="Sidi Saiyyed Mosque">
+                            Sidi Saiyyed Mosque
+                        </a>
+                    </div>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>Discover Gujarat's Heritage</h1>
+                <p>Journey through millennia of art, architecture, and spirituality in India's most vibrant cultural landscape</p>
+                <a href="#" onclick="showPage('#')" class="cta-button">Explore Now →</a>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Iconic Heritage Sites</h2>
+            <p class="section-subtitle">Experience the architectural marvels and spiritual sanctuaries of Gujarat</p>
+            
+            <div class="heritage-grid">
+                <div class="heritage-card" onclick="showDetail('statue-unity')">
+                    <img src="https://i.pinimg.com/736x/6f/36/a3/6f36a3891c69f65e2b89dd4da2e4d23b.jpg" alt="Statue of Unity" class="card-image">
+                    <div class="card-content">
+                        <h3>Statue of Unity</h3>
+                        <p>The world's tallest statue honoring Sardar Vallabhbhai Patel, standing at 182 meters.</p>
+                        <a href="#" class="learn-more">Discover More →</a>
+                    </div>
+                </div>
+
+                <div class="heritage-card" onclick="showDetail('rani-ki-vav')">
+                    <img src="https://i.pinimg.com/1200x/92/c7/11/92c711a2090402caa10c0eb7af5cd730.jpg" alt="Rani ki Vav" class="card-image">
+                    <div class="card-content">
+                        <h3>Rani ki Vav</h3>
+                        <p>UNESCO World Heritage stepwell showcasing intricate carvings from the 11th century.</p>
+                        <a href="#" class="learn-more">Discover More →</a>
+                    </div>
+                </div>
+
+                <div class="heritage-card" onclick="showDetail('modhera')">
+                    <img src="https://i.pinimg.com/736x/4f/36/93/4f36932ffebba4d6cd316e3726d39c5b.jpg" alt="Modhera Sun Temple" class="card-image">
+                    <div class="card-content">
+                        <h3>Modhera Sun Temple</h3>
+                        <p>Ancient temple dedicated to the sun god, featuring astronomical precision and exquisite architecture.</p>
+                        <a href="#" class="learn-more">Discover More →</a>
+                    </div>
+                </div>
+
+                <div class="heritage-card" onclick="showDetail('sabarmati')">
+                    <img src="https://i.pinimg.com/1200x/42/5a/76/425a76ac31732c584bfd5f921e0141c1.jpg" alt="Sabarmati Ashram" class="card-image">
+                    <div class="card-content">
+                        <h3>Sabarmati Ashram</h3>
+                        <p>Gandhi's residence and birthplace of India's independence movement through non-violence.</p>
+                        <a href="#" class="learn-more">Discover More →</a>
+                    </div>
+                </div>
+
+                <div class="heritage-card" onclick="showDetail('champaner')">
+                    <img src="https://i.pinimg.com/1200x/0a/3f/a7/0a3fa70555596d13f8b3e3eb23c8372e.jpg" alt="Champaner-Pavagadh" class="card-image">
+                    <div class="card-content">
+                        <h3>Champaner-Pavagadh</h3>
+                        <p>UNESCO site blending Hindu and Islamic architecture from pre-Mughal times.</p>
+                        <a href="#" class="learn-more">Discover More →</a>
+                    </div>
+                </div>
+
+                <div class="heritage-card" onclick="showDetail('dwarka')">
+                    <img src="https://i.pinimg.com/1200x/a6/36/b5/a636b544f971f6a23e3c8a301e796bba.jpg" alt="Dwarka Temple" class="card-image">
+                    <div class="card-content">
+                        <h3>Dwarka Temple</h3>
+                        <p>One of the Char Dham pilgrimage sites, ancient temple of Lord Krishna by the Arabian Sea.</p>
+                        <a href="#" class="learn-more">Discover More →</a>
+                    </div>
+                </div>
+
+                <div class="heritage-card" onclick="showDetail('somnath')">
+                    <img src="https://i.pinimg.com/1200x/65/80/11/658011808d7a409403f097bd0856dc47.jpg" alt="Somnath Temple" class="card-image">
+                    <div class="card-content">
+                        <h3>Somnath Temple</h3>
+                        <p>First among the twelve Jyotirlinga shrines, rebuilt multiple times through history.</p>
+                        <a href="#" class="learn-more">Discover More →</a>
+                    </div>
+                </div>
+
+                <div class="heritage-card" onclick="showDetail('sidi-saiyyed')">
+                    <img src="https://i.pinimg.com/1200x/10/3b/4d/103b4d19f5682c99c71c64f3d0b46cf1.jpg" alt="Sidi Saiyyed Mosque" class="card-image">
+                    <div class="card-content">
+                        <h3>Sidi Saiyyed Mosque</h3>
+                        <p>Famous for its intricate stone lattice windows, including the iconic Tree of Life jali in Ahmedabad.</p>
+                        <a href="#" class="learn-more">Discover More →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+     
+
+    <!-- DETAIL PAGES -->
+    <div id="statue-unity" class="page detail-page">
+        <div class="detail-hero">
+            <img src="https://i.pinimg.com/736x/6f/36/a3/6f36a3891c69f65e2b89dd4da2e4d23b.jpg" alt="Statue of Unity" class="detail-hero-bg" id="a" >
+            <div class="detail-hero-content">
+                <h1>Statue of Unity</h1>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-main">
+                    <h2>A Monument to Unity</h2>
+                    <p>The Statue of Unity stands as a colossal tribute to Sardar Vallabhbhai Patel, India's Iron Man who unified 562 princely states into the Republic of India. At 182 meters (597 feet), it holds the distinction of being the world's tallest statue, nearly twice the height of the Statue of Liberty.</p>
+                    <p>Designed by sculptor Ram V. Sutar, this architectural marvel took 33 months to complete and was inaugurated on October 31, 2018. The bronze-clad statue stands on the Sadhu Bet island in the Narmada River, overlooking the Sardar Sarovar Dam in Kevadia, Gujarat.</p>
+                    
+                    <h2>Engineering Marvel</h2>
+                    <p>The construction involved over 3,000 workers and 250 engineers. The statue's framework consists of two cylindrical concrete towers containing high-speed elevators that take visitors to a viewing gallery at 153 meters, offering breathtaking panoramic views of the surrounding landscape.</p>
+                    <p>The bronze cladding was created using approximately 1,700 tonnes of bronze, while the total weight of the structure is around 67,000 tonnes. The statue can withstand wind speeds up to 180 km/h and earthquakes measuring up to 6.5 on the Richter scale.</p>
+                    
+                    <h2>Visitor Experience</h2>
+                    <p>The complex includes a museum and audio-visual gallery depicting Sardar Patel's life, the Statue of Unity site museum, and a memorial garden. Light and sound shows held in the evening narrate the story of India's unification through captivating visuals and audio.</p>
+                </div>
+                <div class="detail-sidebar">
+                    <div class="info-box">
+                        <h3>Quick Facts</h3>
+                        <div class="info-item">
+                            <span class="info-label">Height</span>
+                            <span class="info-value">182 meters</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Completed</span>
+                            <span class="info-value">2018</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Kevadia</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Type</span>
+                            <span class="info-value">Monument</span>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h3>Visiting Hours</h3>
+                        <div class="info-item">
+                            <span class="info-label">Open</span>
+                            <span class="info-value">8 AM - 6 PM</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Best Time</span>
+                            <span class="info-value">Oct - Mar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="rani-ki-vav" class="page detail-page">
+        <div class="detail-hero">
+            <img src="https://i.pinimg.com/1200x/92/c7/11/92c711a2090402caa10c0eb7af5cd730.jpg" alt="Rani ki Vav" class="detail-hero-bg">
+            <div class="detail-hero-content">
+                <h1>Rani ki Vav</h1>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-main">
+                    <h2>The Queen's Stepwell</h2>
+                    <p>Rani ki Vav, or the Queen's Stepwell, is an exceptional example of subterranean architecture and one of Gujarat's most magnificent structures. Built in 1063 by Queen Udayamati in memory of her husband King Bhimdev I, this UNESCO World Heritage Site showcases the zenith of the Maru-Gurjara architectural style.</p>
+                    <p>The stepwell is designed as an inverted temple, with seven levels of stairs decorated with more than 500 principal sculptures and over a thousand minor ones. The craftsmanship combines religious, mythological, and secular imagery, creating a visual narrative of life in 11th-century Gujarat.</p>
+                    
+                    <h2>Architectural Brilliance</h2>
+                    <p>Measuring 64 meters long, 20 meters wide, and 27 meters deep, Rani ki Vav is divided into seven levels of stairs with sculptured panels. The walls feature intricate carvings of gods, goddesses, apsaras, and elaborate geometric patterns. The stepwell served both as a water resource and a spiritual refuge.</p>
+                    <p>The sculptures depict the ten avatars of Vishnu, along with representations of divine beings like Brahma, Shiva, and various incarnations of goddess Parvati. The detailed carvings reflect the artistic excellence and the devotion of the artisans who created this masterpiece.</p>
+                    
+                    <h2>Rediscovery</h2>
+                    <p>The stepwell was flooded and silted over centuries. It was rediscovered in the 1940s and excavated in the 1980s by the Archaeological Survey of India. The silt actually helped preserve the intricate sculptures from damage and weathering.</p>
+                </div>
+                <div class="detail-sidebar">
+                    <div class="info-box">
+                        <h3>Quick Facts</h3>
+                        <div class="info-item">
+                            <span class="info-label">Built</span>
+                            <span class="info-value">1063 CE</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">UNESCO</span>
+                            <span class="info-value">2014</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Patan</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Depth</span>
+                            <span class="info-value">27 meters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modhera" class="page detail-page">
+        <div class="detail-hero">
+            <img src="https://i.pinimg.com/1200x/bc/77/8c/bc778cf8685606a279626d55984d2f2f.jpg" alt="Modhera Sun Temple" class="detail-hero-bg">
+            <div class="detail-hero-content">
+                <h1>Modhera Sun Temple</h1>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-main">
+                    <h2>Temple of the Sun God</h2>
+                    <p>The Sun Temple at Modhera is a masterpiece of ancient Indian architecture, built in 1026 CE during the reign of King Bhimdev I of the Solanki dynasty. Dedicated to the solar deity Surya, this temple exemplifies the astronomical knowledge and architectural prowess of medieval Gujarat.</p>
+                    <p>The temple complex is designed so that the sun's rays illuminate the sanctum at the equinoxes. This astronomical precision demonstrates the advanced understanding of celestial mechanics possessed by ancient Indian astronomers and architects.</p>
+                    
+                    <h2>Architectural Components</h2>
+                    <p>The temple consists of three distinct sections: the Surya Kund (stepped tank), Sabha Mandap (assembly hall), and Guda Mandap (sanctum sanctorum). The Sabha Mandap features 52 intricately carved pillars representing the weeks of the year, while the exterior walls showcase elaborate sculptures of deities, celestial beings, and scenes from Hindu mythology.</p>
+                    <p>The Surya Kund, a rectangular stepped tank, contains 108 shrines dedicated to various Hindu deities. The symmetrical design and precise geometric patterns reflect the mathematical sophistication of the era.</p>
+                </div>
+                <div class="detail-sidebar">
+                    <div class="info-box">
+                        <h3>Quick Facts</h3>
+                        <div class="info-item">
+                            <span class="info-label">Built</span>
+                            <span class="info-value">1026 CE</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Dynasty</span>
+                            <span class="info-value">Solanki</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Modhera</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sabarmati" class="page detail-page">
+        <div class="detail-hero">
+            <img src="https://i.pinimg.com/1200x/42/5a/76/425a76ac31732c584bfd5f921e0141c1.jpg" alt="Sabarmati Ashram" class="detail-hero-bg">
+            <div class="detail-hero-content">
+                <h1>Sabarmati Ashram</h1>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-main">
+                    <h2>Cradle of Independence</h2>
+                    <p>Sabarmati Ashram, also known as Gandhi Ashram, served as Mahatma Gandhi's residence from 1917 to 1930. From this peaceful retreat on the banks of the Sabarmati River, Gandhi led India's non-violent struggle for independence from British rule.</p>
+                    <p>It was from here that Gandhi launched the historic Dandi March on March 12, 1930, walking 240 miles to protest the British salt tax. This act of civil disobedience became a pivotal moment in India's independence movement.</p>
+                    
+                    <h2>The Ashram Today</h2>
+                    <p>Today, the ashram preserves Gandhi's living quarters, including his simple room with a spinning wheel, writing desk, and few personal belongings. The museum houses photographs, letters, and artifacts documenting Gandhi's life and the freedom struggle.</p>
+                    <p>The ashram embodies Gandhi's philosophy of simple living, self-reliance, and non-violence. Visitors can explore the peaceful grounds, visit the prayer ground where Gandhi held daily meetings, and learn about his revolutionary ideas that changed the world.</p>
+                </div>
+                <div class="detail-sidebar">
+                    <div class="info-box">
+                        <h3>Quick Facts</h3>
+                        <div class="info-item">
+                            <span class="info-label">Established</span>
+                            <span class="info-value">1917</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Founder</span>
+                            <span class="info-value">M.K. Gandhi</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Ahmedabad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="champaner" class="page detail-page">
+        <div class="detail-hero">
+            <img src="https://i.pinimg.com/1200x/0a/3f/a7/0a3fa70555596d13f8b3e3eb23c8372e.jpg" alt="Champaner-Pavagadh" class="detail-hero-bg">
+            <div class="detail-hero-content">
+                <h1>Champaner-Pavagadh</h1>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-main">
+                    <h2>Archaeological Treasure</h2>
+                    <p>The Champaner-Pavagadh Archaeological Park is a UNESCO World Heritage Site that represents a perfect blend of Hindu and Islamic architecture from the 8th to 14th centuries. The site includes prehistoric sites, historic forts, palaces, religious buildings, and water installations.</p>
+                    <p>Champaner was the capital of Gujarat Sultanate, and the architecture reflects the early Islamic and pre-Mughal city planning. The site contains 11 different types of buildings including mosques, temples, granaries, tombs, wells, walls, and terraces.</p>
+                    
+                    <h2>Key Monuments</h2>
+                    <p>The Jami Masjid, built in 1513, is the most celebrated monument with its intricate stone carvings and distinctive minarets. The Kevada Masjid and Nagina Masjid showcase exquisite craftsmanship with detailed jali work and elegant proportions.</p>
+                    <p>The Pavagadh Hill, at 800 meters elevation, features ancient temples including the Kalika Mata Temple, accessible by ropeway. The fortifications include massive walls, gateways, and bastions that once protected this strategic location.</p>
+                </div>
+                <div class="detail-sidebar">
+                    <div class="info-box">
+                        <h3>Quick Facts</h3>
+                        <div class="info-item">
+                            <span class="info-label">UNESCO</span>
+                            <span class="info-value">2004</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Era</span>
+                            <span class="info-value">8th-14th Century</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Panchmahal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dwarka" class="page detail-page">
+        <div class="detail-hero">
+            <img src="https://i.pinimg.com/1200x/a6/36/b5/a636b544f971f6a23e3c8a301e796bba.jpg" alt="Dwarka Temple" class="detail-hero-bg">
+            <div class="detail-hero-content">
+                <h1>Dwarkadhish Temple</h1>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-main">
+                    <h2>Lord Krishna's Kingdom</h2>
+                    <p>The Dwarkadhish Temple, also known as Jagat Mandir, is one of the four sacred pilgrimage sites (Char Dham) of Hinduism. According to Hindu mythology, Lord Krishna established his kingdom in Dwarka after leaving Mathura, making it one of the most significant religious sites in India.</p>
+                    <p>The temple is believed to be over 2,500 years old, though the current structure was built in the 15th-16th centuries. The main temple rises five stories high, supported by 72 pillars, with a spire reaching 78 meters above sea level.</p>
+                    
+                    <h2>Sacred Architecture</h2>
+                    <p>The temple showcases Chalukya-style architecture with intricate carvings depicting scenes from Krishna's life. The sanctum houses a black stone idol of Krishna, adorned with jewels and elaborate decorations. The temple complex includes several smaller shrines dedicated to various deities.</p>
+                    <p>Archaeological excavations have revealed that ancient Dwarka existed, with remnants discovered underwater in the Arabian Sea. These findings suggest that a prosperous city once thrived here, lending credence to the historical aspects of the Krishna legend.</p>
+                </div>
+                <div class="detail-sidebar">
+                    <div class="info-box">
+                        <h3>Quick Facts</h3>
+                        <div class="info-item">
+                            <span class="info-label">Antiquity</span>
+                            <span class="info-value">2,500+ years</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Char Dham</span>
+                            <span class="info-value">Yes</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Dwarka</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="somnath" class="page detail-page">
+        <div class="detail-hero">
+            <img src="https://i.pinimg.com/1200x/65/80/11/658011808d7a409403f097bd0856dc47.jpg" alt="Somnath Temple" class="detail-hero-bg">
+            <div class="detail-hero-content">
+                <h1>Somnath Temple</h1>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-main">
+                    <h2>The Eternal Shrine</h2>
+                    <p>Somnath Temple is the first among the twelve Jyotirlinga shrines of Shiva. Legend states that the Moon God Soma built the original temple in gold, followed by rebuilding in silver by Ravana, wood by Lord Krishna, and stone by King Bhimdev.</p>
+                    <p>The temple has been destroyed and rebuilt multiple times throughout history, symbolizing the resilience and eternal nature of faith. The current structure, built in the Chalukya style, was completed in 1951 under the direction of Sardar Vallabhbhai Patel and inaugurated by India's first President, Dr. Rajendra Prasad.</p>
+                    
+                    <h2>Architectural Splendor</h2>
+                    <p>The temple stands majestically on the shore of the Arabian Sea, with waves lapping at its base during high tide. The seven-story structure features intricate carvings, towering shikhara, and a massive flag that stands 27 feet tall, changed three times daily.</p>
+                    <p>The temple complex includes a museum showcasing its history and the various invasions it survived. The beach provides a serene setting for contemplation, and the evening aarti (prayer ceremony) is a mesmerizing spiritual experience.</p>
+                    
+                    <h2>Symbol of Resilience</h2>
+                    <p>Despite being plundered by Mahmud of Ghazni in 1026 CE and destroyed several times thereafter, Somnath always rose from the ruins. This temple stands as a testament to the indomitable spirit of Hindu culture and the power of faith to overcome adversity.</p>
+                </div>
+                <div class="detail-sidebar">
+                    <div class="info-box">
+                        <h3>Quick Facts</h3>
+                        <div class="info-item">
+                            <span class="info-label">Jyotirlinga</span>
+                            <span class="info-value">First</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Rebuilt</span>
+                            <span class="info-value">1951</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Veraval</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidi Saiyyed Mosque Detail -->
+    <div id="sidi-saiyyed" class="page detail-page">
+        <div class="detail-hero">
+            <img src="https://i.pinimg.com/1200x/10/3b/4d/103b4d19f5682c99c71c64f3d0b46cf1.jpg" alt="Sidi Saiyyed Mosque" class="detail-hero-bg">
+            <div class="detail-hero-content">
+                <h1>Sidi Saiyyed Mosque</h1>
+            </div>
+        </div>
+        <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-main">
+                    <h2>The Jewel of Stone Latticework</h2>
+                    <p>The Sidi Saiyyed Mosque in Ahmedabad is one of the most celebrated monuments of Gujarat, famed for its exquisite stone lattice windows, or jalis. Built in 1573 during the final years of the Gujarat Sultanate, the mosque is a masterpiece of Indo-Islamic architecture.</p>
+                    <p>The most iconic feature is the “Tree of Life” jali on the western wall — a single slab of stone carved into an intricate network of intertwined branches and foliage. This motif has become a symbol of Ahmedabad and is widely used in art, design, and even the city’s branding.</p>
+                    
+                    <h2>Architectural Elegance</h2>
+                    <p>The mosque’s prayer hall is supported by graceful arches and pillars, with light filtering delicately through the carved stone screens. The jalis not only decorate the structure but also act as natural cooling systems, allowing air and soft daylight to pass through while keeping the interior shaded.</p>
+                    <p>The symmetrical layout, balanced proportions, and detailed craftsmanship showcase the high level of artistic and technical skill of the artisans of the Gujarat Sultanate period.</p>
+                    
+                    <h2>Cultural Significance</h2>
+                    <p>Today, the Sidi Saiyyed Mosque is not just a place of worship but also a cultural icon. Architecture students, photographers, and visitors from around the world come to admire its legendary stonework. It stands as a reminder of Ahmedabad’s heritage as a thriving center of art, trade, and culture.</p>
+                </div>
+                <div class="detail-sidebar">
+                    <div class="info-box">
+                        <h3>Quick Facts</h3>
+                        <div class="info-item">
+                            <span class="info-label">Built</span>
+                            <span class="info-value">1573 CE</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Style</span>
+                            <span class="info-value">Indo-Islamic</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Famous For</span>
+                            <span class="info-value">Tree of Life jali</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Location</span>
+                            <span class="info-value">Ahmedabad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Gujarat Heritage Tourism</h4>
+                <p>Preserving the past, inspiring the future. Explore the architectural marvels and spiritual sanctuaries of Gujarat's rich cultural landscape.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('about')">About Us</a>
+                <a href="#">Plan Your Visit</a>
+                <a href="#">Virtual Tours</a>
+            </div>
+            <div class="footer-section">
+                <h4>Heritage Sites</h4>
+                <a href="#" onclick="showDetail('statue-unity')">Statue of Unity</a>
+                <a href="#" onclick="showDetail('rani-ki-vav')">Rani ki Vav</a>
+                <a href="#" onclick="showDetail('modhera')">Modhera Sun Temple</a>
+                <a href="#" onclick="showDetail('somnath')">Somnath Temple</a>
+                <a href="#" onclick="showDetail('sidi-saiyyed')">Sidi Saiyyed Mosque</a>
+            </div>
+            <div class="footer-section">
+                <h4>25012250210053</h4>
+                <p>Gujarat Tourism Department</p>
+                <p>Umar Memon</p>
+                <p>Email: info@gujaratheritage.com</p>
+                <p>Phone: +91-79-XXXX-XXXX</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Gujarat Heritage Tourism. All rights reserved. | Designed with passion for preservation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showDetail(detailId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(detailId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenu.addEventListener('click', () => {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.background = 'rgba(10, 25, 47, 0.95)';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '70px';
+            navMenu.style.right = '20px';
+            navMenu.style.padding = '1rem 1.5rem';
+            navMenu.style.borderRadius = '10px';
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !href.includes('onclick')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe heritage cards
+        document.querySelectorAll('.heritage-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
